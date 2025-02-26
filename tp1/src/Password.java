@@ -40,9 +40,15 @@ public class Password {
      */
     public static String bruteForce6Digit(String targetHash) {
 
-        // Code here
+        int i = 0;
 
-        return null;
+        while (i < 1000000) {
+            if (hashPassword(String.valueOf(i)) == targetHash) {
+                return String.valueOf(i);
+            }
+            i++;
+        }
+        return "nothing";
     }
 
     /**
@@ -61,9 +67,29 @@ public class Password {
      */
     public static boolean isStrongPassword(String password) {
 
-        // Code here
+        if (password.length() < 12) {
+            return false;
+        }
+        boolean kappa1 = false;
+        boolean kappa2 = false;
+        boolean kappa3 = false;
+        for (int i = 0; i < password.length(); i++) {
+            if (Character.isUpperCase(password.charAt(i))) {
+                kappa1 = true;
+            } else if (Character.isLowerCase(password.charAt(i))) {
+                kappa2 = true;
+            } else if (Character.isDigit(password.charAt(i))) {
+                kappa3 = true;
+            } else if (Character.isWhitespace(password.charAt(i))) {
+                return false;
+            }
+        }
 
-        return false;
+        if (kappa1 && kappa2 && kappa3) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -76,9 +102,11 @@ public class Password {
      */
     public static HashMap<String, Boolean> checkPasswordsList(ArrayList<String> passwords) {
 
-        // Code here
-
-        return null;
+        HashMap<String, Boolean> hm = new HashMap<>();
+        for (int i = 0; i < passwords.size(); i++) {
+            hm.put(passwords.get(i), isStrongPassword(passwords.get(i)));
+        }
+        return hm;
     }
 
     /**
@@ -94,8 +122,6 @@ public class Password {
      * @return A randomly generated password that meets the security criteria.
      */
     public static String generatePassword(int nbCar) {
-
-        // Code here
 
         return null;
     }
